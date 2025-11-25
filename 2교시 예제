@@ -3,8 +3,8 @@
 int main() {
     int num;
 
-    // 폴더 경로 (원하는 폴더 경로 직접 수정)
-    const char *folderPath = "C:/Users/yoonw/Desktop/new";
+    // 웹버전 OnlineGDB에서는 현재 폴더(".") 사용
+    const char *folderPath = ".";
 
     char filename[300];
     FILE *fp;
@@ -12,20 +12,17 @@ int main() {
     printf("파일을 입력하세요: (2~19까지의 정수)\n");
     printf("입력: ");
 
-    // 정수 입력 검사
     if (scanf("%d", &num) != 1) {
         printf("잘못된 파일명을 입력하셨습니다.\n");
         return 0;
     }
 
-    // 범위 검사
     if (num < 2 || num > 19) {
         printf("잘못된 파일명을 입력하셨습니다.\n");
         return 0;
     }
 
-    // 파일명 조합
-    // CHAPTER02, CHAPTER03 ... CHAPTER19 형태
+    // 파일명과 위치 조합
     sprintf(filename,
         "%s/혼자 공부하는 C언어(개정판)_CHAPTER%02d.txt",
         folderPath, num);
@@ -37,13 +34,15 @@ int main() {
         return 0;
     }
 
+    // 출력
     printf("\n===== 파일 정보 =====\n");
     printf("컴파일 날짜와 시간: %s %s\n", __DATE__, __TIME__);
-    printf("파일명: %s\n", filename);
-    printf("함수명: %s\n", __func__);
+    printf("파일 위치: %s\n", filename);   // ← 경로 포함
+    printf("함수명: fopen\n");             // ← 파일 열 때 사용한 함수
     printf("파일번호: %d\n", num);
     printf("=====================\n");
 
     fclose(fp);
     return 0;
 }
+
